@@ -95,3 +95,5 @@ create table pessoas(
 . No campo de ID, vamos usar duas regras o NOT NULL para que o campo seja OBRIGATORIAMENTE preenchido e o AUTO_INCREMENT que serve para o sistema automaticamente preencher a ordem de pessoas cadastradas, como por exemplo: primeira pessoa, segunda pessoa, terceira pessoa...
 
 . Ja no campo PRIMARY KEY ele cria a chave primaria, que assim nao deixa cadastrar duas pessoas exatamente iguais no banco de dados
+
+
