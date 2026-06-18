@@ -94,6 +94,8 @@ create table pessoas(
 
 . No campo de ID, vamos usar duas regras o NOT NULL para que o campo seja OBRIGATORIAMENTE preenchido e o AUTO_INCREMENT que serve para o sistema automaticamente preencher a ordem de pessoas cadastradas, como por exemplo: primeira pessoa, segunda pessoa, terceira pessoa...
 
+. Temos tambem o caso de NOT NULL UNIQUE, que refesse a um nome que nao pode ser repetido, exatamente igual, por exemplo dois nomes 'Roberto'.
+
 . Ja no campo PRIMARY KEY ele cria a chave primaria, que assim nao deixa cadastrar duas pessoas exatamente iguais no banco de dados
 
 ----------------------------------------------------------------------------------------------------------
@@ -138,3 +140,62 @@ INSERT INTO pessoas VALUES
 . Para firmar conhecimento comandos DDL's(DATA DEFINITION LANGUAGE) são comandos de DEFINIÇÃO, que são para definir a estrutura do banco de dados, como por exemplo o CREATE DATABASE e CREATE TABLE
 
 . Comandos DML's(DATA MANIPULATION LANGUAGE) são comandos para MANIPULAÇÕES de dados como por exemplo INSERT INTO
+
+----------------------------------------------------------------------------------------------------------
+
+. Temos um comando para alterar a tabela no banco de dados, e esse comando é ALTER TABLE (nome da tabela) exemplo: 
+
+ALTER TABLE pessoas
+
+. Em seguida para adicionar algum campo novo na tabela, usamos ADD COLUMN (nome do campo que deseja adicionar) exemplo: 
+
+ALTER TABLE pessoas
+ADD COLUMN (nome do campo para adicioar)(Tipo primitivo);
+
+. Para excluir um campo no banco de dados, utiliza-se o comando DROP COLUMN (nome do campo) exemplo:
+
+ALTER TABLE pessoas
+DROP COLUMN (nome do campo)
+
+. Lembrando que COLUMN refere-se ao campo da tabela, como por exemplo o campo NOME, NASCIMENTO, PESO...
+
+----------------------------------------------------------------------------------------------------------
+
+. Para adicionar um campo em local especifico entre os campos que ja existem na tabela utilizamos o comando AFTER, segue o exemplo: 
+
+ALTER TABLE (nome da tabela)
+ADD COLUMN (nome do campo)(tipo primitivo) AFTER (nome do campo que sera utilizado de referencia para locaçao do novo campo)
+
+. Ja para adicionar um campo em primeira posição na tabela utilizamos o comando FIRST, segue o exemplo:
+
+ALTER TABLE (nome da tabela)
+ADD COLUMN (nome do campo)(tipo primitivo) FIRST;
+
+. Para alterar o valor de um tipo primitivo como por exemplo o campo PROFISSAO que esta com o VARCHAR(10), utilizamos o comando MODIFY COLUMN, segue o exemplo: 
+
+ALTER TABLE pessoas
+MODIFY COLUMN profissao varchar(20)
+
+. Para renomear um campo ou uma regra(constrants) utilizamos o codigo CHANGE COLUMN, segue o exemplo:
+
+ALTER TABLE pessoas
+CHANGE COLUMN (nome do campo que vai ser alterado) (novo nome desse campo)(tipo primitivo)
+
+. Para renomear a tabela toda, utiliza-se o comando RENAME TO, segue o exemplo:
+
+alter table pessoas
+RENAME TO (novo nome da tabela);
+
+----------------------------------------------------------------------------------------------------------
+
+. Um comando muito importante que serve para ver o conteudo que tem na tabela, é o DESCRIBE ou DESC, exemplo:
+
+desc (nome da tabela);
+
+. Ele mostrava todos os campos que a tabela possue
+
+----------------------------------------------------------------------------------------------------------
+
+. Para nao correr o risco de sobreescrever uma tabela ja criada, podemos utilizar o comando IF NOT EXISTS, isso faz com que a tabela nova só seja criada, se ela nao existir ja no banco de dados, segue o exemplo:
+
+CREATE TABLE IF NOT EXISTS (nome da tabela)()
