@@ -137,4 +137,4 @@ INSERT INTO pessoas VALUES
 
 . Para firmar conhecimento comandos DDL's(DATA DEFINITION LANGUAGE) são comandos de DEFINIÇÃO, que são para definir a estrutura do banco de dados, como por exemplo o CREATE DATABASE e CREATE TABLE
 
-. Comandos DML's(DATA MANIPULATION LANGUAGE) são comandos para MANIPULAÇÕES de dados como por exemplo o comando INSERT INTO
+. Comandos DML's(DATA MANIPULATION LANGUAGE) são comandos para MANIPULAÇÕES de dados como por exemplo INSERT INTO
