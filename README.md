@@ -96,4 +96,45 @@ create table pessoas(
 
 . Ja no campo PRIMARY KEY ele cria a chave primaria, que assim nao deixa cadastrar duas pessoas exatamente iguais no banco de dados
 
+----------------------------------------------------------------------------------------------------------
 
+. Para inserir dados no banco de dados utiliza-se o comando INSERT INTO (nome da tabela) e logo abaixo dessa linha de comando criamos uma lista com o nome dos parametros ja criados anteriormente na tabela, segue o EX:
+
+INSERT INTO PESSOAS
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+
+. E logo após utilisamos VALUES, segue o exemplo: 
+
+VALUES
+('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+
+. As linhas do codigo ficam da seguinte forma: 
+
+INSERT INTO PESSOAS
+(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES
+('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+
+. Lembrando de sempre utilizar a virgula para separar os valores, de sempre colocar os valores na mesma ordem do que esta sendo pedido, EX: nome, colocar o nome da pessoa, nascimento, colocar a data de nascimento da pessoa...
+
+. Caso os valores a serem inseridos na tabela, estiverem na mesma sequencia dos campos inseridos no banco, não precisa criar a lista com os nomes de cada campo, segue o exemplo: 
+
+INSERT INTO pessoas VALUES
+('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+
+. Para adicionar mais de uma pessoa de uma unica vez, ao inves de utilizar o ponto e virgula no final de cada informação de pessoa, utiliza-se somente a VIRGULA, segue o exemplo da inserção de 3 pessoas ao mesmo tempo: 
+
+INSERT INTO pessoas VALUES
+(default ,'Cassia', '1995-02-28', 'F', '60.5', '1.65', 'Brasil'),
+(default, 'Murilo', '2025-08-10', 'M', '12.0', '1.00', 'Brasil'),
+(default, 'Roberto', '1996-08-07', 'M', '95.5', '1.85', 'Brasil');
+
+. Lembrando que sempre pra encerrar a linha de comando utilizar o PONTO E VIRGULA (;)
+
+. Neste caso estamos usando a regra(constraints) DEFAULT, porque quando criamos os campos de ID e NACIONALIDADE, definimos valores padrões como por exemplo na NACIONALIDADE 'Brasil', quando usamos DEFAULT o sistema preenchera automaticamente com o que ja definimos previamente na criação do campo, no caso do ID temos a regra(constraints) AUTO_INCREMENT que nesse caso ele preencherá de forma automatica a sequencia de pessoas cadastradas.
+
+----------------------------------------------------------------------------------------------------------
+
+. Para firmar conhecimento comandos DDL's(DATA DEFINITION LANGUAGE) são comandos de DEFINIÇÃO, que são para definir a estrutura do banco de dados, como por exemplo o CREATE DATABASE e CREATE TABLE
+
+. Comandos DML's(DATA MANIPULATION LANGUAGE) são comandos para MANIPULAÇÕES de dados como por exemplo o comando INSERT INTO
