@@ -160,7 +160,9 @@ DROP COLUMN (nome do campo)
 . Lembrando que COLUMN refere-se ao campo da tabela, como por exemplo o campo NOME, NASCIMENTO, PESO...
 
 ----------------------------------------------------------------------------------------------------------
+                                      COMANDOS ALTER TABLE
 
+                                      
 . Para adicionar um campo em local especifico entre os campos que ja existem na tabela utilizamos o comando AFTER, segue o exemplo: 
 
 ALTER TABLE (nome da tabela)
@@ -186,6 +188,14 @@ CHANGE COLUMN (nome do campo que vai ser alterado) (novo nome desse campo)(tipo 
 alter table pessoas
 RENAME TO (novo nome da tabela);
 
+. Para transformar um campo em PRIMARY KEY, utiliza-se o comando ADD PRIMARY KEY, segue o exemplo:
+
+ALTER TABLE (nome da tabela)
+ADD PRIMARY KEY(nome do campo que se tornará a CHAVE PRIMARIA da tabela);
+
+. Para apagar uma tabela toda, utiliza-se o comando DROP TABLE, segue o exemplo:
+
+DROP TABLE (nome da tabela)
 ----------------------------------------------------------------------------------------------------------
 
 . Um comando muito importante que serve para ver o conteudo que tem na tabela, é o DESCRIBE ou DESC, exemplo:
