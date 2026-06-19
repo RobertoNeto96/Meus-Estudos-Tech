@@ -209,3 +209,64 @@ desc (nome da tabela);
 . Para nao correr o risco de sobreescrever uma tabela ja criada, podemos utilizar o comando IF NOT EXISTS, isso faz com que a tabela nova só seja criada, se ela nao existir ja no banco de dados, segue o exemplo:
 
 CREATE TABLE IF NOT EXISTS (nome da tabela)()
+
+----------------------------------------------------------------------------------------------------------
+                        COMANDOS DELETE, UPDATE, SET, WHERE E TRUNCATE
+
+. Para alterar informações de alguma LINHA na tabela, utilizamos o codigo UPDATE, em seguida usamos SET para mostrar qual campo sera alterado, seja ele o campo de nome, nascimento, peso, seguido de um sinal de IGUAL (=), seguido da informação que será colocado no campo em questao, dentro de 'ASPAS', em seguida utilizamos um comando de referencia para saber qual LINHA sera alterado o campo, o comando é WHERE seguido do nome DA COLUNA de referencia como por exemplo o ID da pessoa, segue o exemplo
+
+UPDATE (nome da tabela)
+SET (nome do campo) = '(Nova informação que sera inserida, ou substituirá a informação antiga)'
+WHERE (nome da coluna de referencia) = '(Valor que se encontra nessa coluna de referencia)'
+
+TABELA COM A INFORMAÇÃO ERRADA
+
+Tabela CURSOS:
+idcurso       nome       carga      ano
+
+   1          HTML4       40        2014
+   4          PGP         40        2010
+   5          JARVA       10        2000
+
+. Utilizando os comandos para alterar o nome do curso incorreto, ficará assim
+
+UPDATE Cursos
+SET nome = 'HTML5'
+WHERE idcurso = '1';
+
+. Resumindo esse comando nesse exemplo trocara o nome do curso de HTML4 para HTML5, usando o WHERE como referencia de coluna para saber qual nome exatamente sera modificado
+
+. Para alterar dois campos na mesma linha utilizamos a VIRGULA(,) para dar mais alteraçoes ao comando, seguindo o exemplo de cima, vamos somente adicionar a VIRGULA no comando SET, segue o exemplo
+
+TABELA COM A INFORMAÇÃO ERRADA
+
+Tabela CURSOS:
+idcurso       nome       carga      ano
+
+   1          HTML4       40        2014
+   4          PGP         40        2010
+   5          JARVA       10        2000
+
+UPDATE cursos
+SET nome = 'PHP' , ano = '2015'
+WHERE idcruso = '4';
+
+. Para efeito de segurança toda vez que for necessario utilizar o comando UPDATE, utilizamos um 'regra' que o comando de LIMIT, basicamente ele limita o comando do UPDATE na quantidade de linhas que voce designar no comando LIMITI, segue o exemplo:
+
+UPDATE cursos
+SET nome = 'JAVA' , carga = '40', ano = '2015'
+WHERE idcurso = '5'
+LIMIT 1;
+
+. O LIMIT é basicamente uma trava de segurança a mais, para nao ocorrer de alterar campos que não podem ser alterados utilizando incorretamente o comando WHERE para pegar a coluna de referencia
+
+. Para apagar LINHAS de uma coluna utilizamos o comando DELETE FROM em seguida utilizamos o comando FROM, segue o exemplo:
+
+DELETE FROM cursos
+WHERE idcurso = '8';
+
+. Para apagar TODAS as linhas de uma tabela utiliza-se o comando TRUNCATE, segue o exemplo:
+
+TRUNCATE TABLE (nome da tabela)
+
+----------------------------------------------------------------------------------------------------------
