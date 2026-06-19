@@ -270,3 +270,14 @@ WHERE idcurso = '8';
 TRUNCATE TABLE (nome da tabela)
 
 ----------------------------------------------------------------------------------------------------------
+
+                     GERENCIAMENTO DE SEGURANÇA DO BANCO DE DADOS (BACKUP)
+
+. O termo utilizado para referir-se a um backup de um banco de dados é DUMP
+
+. Para criar um backup do seu banco de dados seguimos o seguinte caminho SERVER >> DATA EXPORT >> em seguida escolhemos o banco de dados que queremos criar o backup >> Depois escolhemos quais tabelas queremos fazer o backup (recomenda-se fazer o bacluk do banco de dados inteiro) >> depois escolhemos o tipo de DUMP que faremos, se sera somente da estrutura do banco de dados (DUMP STRUCTURE ONLY) ou se será feito o DUMP somente dos dados do banco de dados (DUMP DATA ONLY), e caso queira o banco de dados completo, selecionamos o DUMP completo (DUMP STRUCTURE AND DATA) >> Em seguida selecionamos o tipo da exportação, se sera em arquivo unico ou a pasta completa >> Em seguida escolhemos em qual pasta será salvo o DUMP >> Marcamos a caixa INCLUDE CREATE SCHEMA, que é basicamente para seu banco de dados ja ser exportado com as configurações do CREATE TABLE, sem a necessidade de voce precisar dar esse comando quando IMPORTAR o DUMP em outra maquina >> Clicamos em START EXPORT >> Colocamos a senha do banco de dados e se precisar o usuario também >> Para encontrar a pasta onde foi salva o DUMP, caso nao tenha alterado no campo de escolha da pasta, basta ir em >> WINDOWS EXPLORER >> DOCUMENTOS >> DUMP      
+
+. Para IMPORTAR o DUMP >> SERVER >> IMPORT DATA >> Selecione a pasta que esta salva o DUMP feito do EXPORT >> IMPORT DATA 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
