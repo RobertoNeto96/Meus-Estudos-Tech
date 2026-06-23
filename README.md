@@ -1,32 +1,43 @@
 # Meus-Estudos-Tech
 
-Repositório dedicado ao registro da minha jornada de estudos em tecnologia, centralizando anotações, exercícios e projetos práticos
+Repositório dedicado ao registro da minha jornada de estudos em tecnologia, centralizando anotações, exercícios e projetos práticos baseados no curso de MySQL do Curso em Vídeo (Prof. Gustavo Guanabara).
 
 ----------------------------------------------------------------------------------------------------------
 
-TIPOS PRIMITIVOS SQL
+TIPOS PRIMITIVOS NO SQL
 
-. Numérico
-Sub Tipos : Inteiros , Reais e Lógicos
+Ao criar campos em uma tabela, precisamos definir a natureza dos dados que eles irão receber. Os principais tipos primitivos são:
 
-. Data/Tempo
+. Numéricos:
+  - Inteiros: Usados para contagens e números sem casas decimais (Ex: TINYINT, INT, BIGINT).
+  - Reais: Usados para valores com casas decimais (Ex: FLOAT, DOUBLE, DECIMAL).
+  - Lógicos: Usados para estados verdadeiro/falso (Ex: BOOLEAN, representado internamente como TINYINT).
 
-. Literal
-Sub Tipos: Caracteres , Textos , Binários e Coleções
+. Data/Tempo: Usados para armazenar registros cronológicos (Ex: DATE para datas YYYY-MM-DD, TIME para horas, DATETIME e TIMESTAMP para data e hora, YEAR para anos).
 
-. Espacial
+. Literais (Textos):
+  - Caracteres: CHAR (tamanho fixo, ideal para siglas como sexo ou estados) e VARCHAR (tamanho variável, economiza memória).
+  - Textos Longos: TEXT e LONGTEXT (para descrições e grandes blocos de texto).
+  - Binários: BLOB e LONGBLOB (para arquivos, imagens ou mídias armazenadas no banco).
+  - Coleções: ENUM (lista fechada de opções pré-definidas) e SET.
+
+. Espaciais: Usados para dados geográficos e de geolocalização (Ex: GEOMETRY, POINT, POLYGON).
 
 ---------------------------------------------------------------------------------------------------------
 
-Para começar entende-se que BANCO DE DADOS possuem TABELAS que por sua vez TABELAS possuem REGISTROS que por sua vez REGISTROS são compostos por CAMPOS
+CONCEITOS BÁSICOS DE ESTRUTURA
 
-Para criar um novo banco de dados utiliza-se CREATE DATABASE (nome do banco de dados)
+Para começar, entende-se a hierarquia de um banco de dados relacional da seguinte forma: um BANCO DE DADOS possui TABELAS, que por sua vez possuem REGISTROS (linhas ou tuplas), e esses REGISTROS são compostos por CAMPOS (colunas ou atributos).
 
-Para criar TABELAS utiliza-se CREATE TABLE (nome da tabela) (
+Para criar um novo banco de dados, utiliza-se o comando:
+CREATE DATABASE nome_do_banco;
 
-. Dentro desse parenteses, colocamos os nomes dos registros a serem utilizados, SEMPRE COLOCANDO VIRGULA APOS CADA REGISTRO, E SOMENTE NO ULTIMO REGISTRO NAO UTILIZA-SE A VIRGULA
+Para criar tabelas, utiliza-se o comando:
+CREATE TABLE nome_da_tabela ( ... );
 
-. Na frente de cada registro precisa identificar exatamente o tipo primitivo de cada um, como egue os exemplos:
+. Regra dos parênteses: Dentro dos parênteses do comando CREATE TABLE, colocamos os nomes e tipos dos campos a serem utilizados, SEMPRE SEPARADOS POR VÍRGULA. Apenas o último campo da lista NÃO leva vírgula antes do fechamento dos parênteses.
+
+. Na frente de cada campo, é obrigatório identificar o seu tipo primitivo e tamanho (quando necessário), conforme o exemplo abaixo:
 
 nome varchar(30),
 idade tinyint(3),
@@ -34,251 +45,237 @@ peso float,
 sexo char(1),
 altura float,
 nacionalidade varchar(20)
-);
- 
+
 ---------------------------------------------------------------------------------------------------------
 
-Atalho para executar comandos Ctrl + Enter
+DICAS E COMANDOS DE AMBIENTE
 
-Para apagar um banco de dados devemos criar um novo SQL FILE e depois utilizar o comando DROP DATABASE (nome do banco de dados);
+. Atalho essencial: No MySQL Workbench, o atalho para executar a linha de comando atual (onde o cursor está posicionado) é Ctrl + Enter.
 
-----------------------------------------------------------------------------------------------------------
-
-Para criar um banco de dados mais padronizados vamos configurar comandos após o CREATE DATABASE
-
-create database cadastro
-default character set utf8
-default collate utf8_general_ci;
-
-esses comandos são para criar um banco de dados que suportam caracteres especiais, que serão muito usados.
+. Para apagar um banco de dados completo e todos os seus dados permanentemente, utiliza-se o comando:
+DROP DATABASE nome_do_banco;
 
 ----------------------------------------------------------------------------------------------------------
 
-Para criar tabelas mais estruturadas e bem mais detalhadas vamos definir algumas regras (contraits), segue o exemplo da nova tabela criada:
+PADRONIZAÇÃO E INTERNACIONALIZAÇÃO (CHARSET)
 
-create table pessoas(
-    nome varchar() NOT NULL,
+Para criar um banco de dados robusto e preparado para o idioma português, configuramos parâmetros de codificação de caracteres logo após o CREATE DATABASE. Isso garante o suporte correto a acentos, cedilhas e caracteres especiais:
+
+CREATE DATABASE cadastro
+DEFAULT CHARACTER SET utf8mb4
+DEFAULT COLLATE utf8mb4_general_ci;
+
+*(Nota: O uso de utf8mb4 é o padrão moderno recomendado para o MySQL, pois além de caracteres latinos, oferece suporte completo até para emojis).*
+
+----------------------------------------------------------------------------------------------------------
+
+RESTRICÕES DE COLUNAS (CONSTRAINTS)
+
+Para criar tabelas mais estruturadas, seguras e detalhadas, definimos regras de comportamento para as colunas (chamadas de constraints). Veja o exemplo de uma tabela estruturada:
+
+CREATE TABLE pessoas (
+    nome varchar(30) NOT NULL,
     nascimento date,
-    sexo enum('M' , 'F'),
-    peso decimal (5 , 2),
-    altura decimal (3 , 2),
+    sexo enum('M', 'F'),
+    peso decimal(5, 2),
+    altura decimal(3, 2),
     nacionalidade varchar(20) DEFAULT 'Brasil'
-) default charset = utf8;
+) DEFAULT CHARSET = utf8mb4;
 
-. Lembrando que a regra NOT NULL, força o preenchimento da linha em questão, no caso do exemplo o nome da pessoa a ser cadastrada.
+. A restrição NOT NULL força o preenchimento obrigatório daquele campo. No exemplo acima, o banco rejeitará qualquer tentativa de cadastro que deixe o "nome" em branco.
 
-. Ja no campo de SEXO o tipo primitivo ENUM força o preenchimento do campo com algum valor ja pré definido, no caso M ou F de masculino ou feminino, lembrando de sempre definir entre os parenteses os valores que serao permitidos, utilizando aspas e virgula para separar os valores.
+. O tipo primitivo ENUM funciona como uma restrição de lista fechada. No campo "sexo", o banco só aceitará os valores explicitamente definidos entre aspas e separados por vírgula ('M' ou 'F'). Qualquer outro valor inserido causará um erro.
 
-. No campo de peso utilizamos o tipo primitivo decimal para definir com precisão o tamno do espaço que sera utilizado, no caso do 5 , 2 o primeiro numero (5) é a quantidade de casas que sera usado na memoria, já o segundo numero (2) é a quantidade de casas que ficaram após a virgula, sendo assim qualquer que peso que for colocado sera divido exatamente da forma certa, como por Exemplo: 105,12Kg , 65,29Kg ...
+. No campo "peso" e "altura", utilizamos o tipo DECIMAL para obter precisão numérica exata (evitando os arredondamentos incorretos do tipo FLOAT). Na configuração decimal(5, 2), o primeiro número (5) representa o total de dígitos que a memória irá guardar, enquanto o segundo número (2) indica quantos desses dígitos serão após a vírgula. Exemplos válidos: 105.12, 65.29, 7.50.
 
-. No campo de nacionalidade Vamos usar a regra (constraints) DEFAULT ' ' nesse caso o DEFAULT serve para caso o campo nao seja preenchido com nenhuma informação, automaticamente ele sera preenchido com a informação que foi colocado entre as ASPAS após o DEFAULT, no caso 'Brasil'
+. A restrição DEFAULT serve para definir um valor padrão. No campo "nacionalidade", se o usuário omitir essa informação durante o cadastro, o MySQL preencherá o campo de forma automática com o texto 'Brasil'.
 
 ----------------------------------------------------------------------------------------------------------
 
-. Importante para um banco de dados criar um campo de CHAVE PRIMARIA, que consiste em criar um valor que diferencia duas ou mais pessoas, como por exemplo o CPF de uma pessoa ou uma MATRICULA de faculdade e afins, sendo que duas pessoas podem ter o mesmo nome, mas nunca terao o mesmo CPF
+A IMPORTÂNCIA DA CHAVE PRIMÁRIA (PRIMARY KEY)
 
-. Para criar uma CHAVE PRIMARIA vamos adicionar uma linha no começo da TABELA e uma no final
+. Em um banco de dados profissional, todo registro precisa de uma identidade única que o diferencie dos demais. Duas pessoas podem ter exatamente o mesmo nome, peso e altura, mas precisam ter identificadores diferentes (como o CPF no mundo real, ou uma Matrícula). Essa é a função da Chave Primária (PRIMARY KEY).
 
-. No começo da tabela vamos criar o ID e na utltima linha vamos criar o PRIMARY KEY(id) segue o exemplo: 
+. Para implementar uma Chave Primária com numeração automática, adicionamos a coluna correspondente no início e a regra no encerramento da tabela:
 
-create table pessoas(
+CREATE TABLE pessoas (
     id int NOT NULL AUTO_INCREMENT,
-    nome varchar() NOT NULL,
+    nome varchar(30) NOT NULL,
     nascimento date,
-    sexo enum('M' , 'F'),
-    peso decimal (5 , 2),
-    altura decimal (3 , 2),
+    sexo enum('M', 'F'),
+    peso decimal(5, 2),
+    altura decimal(3, 2),
     nacionalidade varchar(20) DEFAULT 'Brasil',
-    primary key(id)
-) default charset = utf8;
+    PRIMARY KEY (id)
+) DEFAULT CHARSET = utf8mb4;
 
-. No campo de ID, vamos usar duas regras o NOT NULL para que o campo seja OBRIGATORIAMENTE preenchido e o AUTO_INCREMENT que serve para o sistema automaticamente preencher a ordem de pessoas cadastradas, como por exemplo: primeira pessoa, segunda pessoa, terceira pessoa...
+. A propriedade AUTO_INCREMENT faz com que o próprio MySQL gerencie a numeração sequencial dos registros (1, 2, 3, 4...). O desenvolvedor não precisa se preocupar em adivinhar qual é o próximo número.
 
-. Temos tambem o caso de NOT NULL UNIQUE, que refesse a um nome que nao pode ser repetido, exatamente igual, por exemplo dois nomes 'Roberto'.
-
-. Ja no campo PRIMARY KEY ele cria a chave primaria, que assim nao deixa cadastrar duas pessoas exatamente iguais no banco de dados
+. Existe também a restrição UNIQUE. Enquanto a Chave Primária é o identificador principal da linha, a constraint UNIQUE garante que uma coluna secundária não possua valores repetidos no banco de dados (muito utilizada para colunas de E-mail, CPF ou Título de Eleitor).
 
 ----------------------------------------------------------------------------------------------------------
 
-. Para inserir dados no banco de dados utiliza-se o comando INSERT INTO (nome da tabela) e logo abaixo dessa linha de comando criamos uma lista com o nome dos parametros ja criados anteriormente na tabela, segue o EX:
+MANIPULAÇÃO DE DADOS: INSERÇÃO (INSERT INTO)
 
-INSERT INTO PESSOAS
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
+. Para alimentar a tabela com dados, utilizamos o comando DML chamado INSERT INTO, especificando o nome da tabela, a lista de colunas desejadas e, em seguida, a cláusula VALUES com os respectivos registros:
 
-. E logo após utilisamos VALUES, segue o exemplo: 
+INSERT INTO pessoas (id, nome, nascimento, sexo, peso, altura, nacionalidade)
+VALUES (DEFAULT, 'Roberto', '1996-08-07', 'M', 95.50, 1.85, 'Brasil');
 
-VALUES
-('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+. Atenção às regras: Os valores textuais e datas devem ficar entre aspas simples (' '), os números decimais utilizam ponto (.) como separador, e todos os valores devem seguir rigorosamente a mesma ordem das colunas declaradas.
 
-. As linhas do codigo ficam da seguinte forma: 
+. Atalho de inserção: Se você for preencher TODOS os campos da tabela e possuir os dados na ordem exata em que as colunas foram criadas, a declaração inicial das colunas pode ser omitida:
 
-INSERT INTO PESSOAS
-(id, nome, nascimento, sexo, peso, altura, nacionalidade)
-VALUES
-('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+INSERT INTO pessoas VALUES (DEFAULT, 'Roberto', '1996-08-07', 'M', 95.50, 1.85, 'Brasil');
 
-. Lembrando de sempre utilizar a virgula para separar os valores, de sempre colocar os valores na mesma ordem do que esta sendo pedido, EX: nome, colocar o nome da pessoa, nascimento, colocar a data de nascimento da pessoa...
-
-. Caso os valores a serem inseridos na tabela, estiverem na mesma sequencia dos campos inseridos no banco, não precisa criar a lista com os nomes de cada campo, segue o exemplo: 
+. Inserção múltipla: Para cadastrar vários registros de uma única vez (otimizando a performance do banco), separamos os blocos de dados por VÍRGULA e inserimos o PONTO E VÍRGULA (;) apenas no final do último bloco:
 
 INSERT INTO pessoas VALUES
-('1', 'Roberto', '1996-08-07', 'M', '95.50', '1.85', 'Brasil');
+(DEFAULT, 'Cassia', '1995-02-28', 'F', 60.5, 1.65, 'Brasil'),
+(DEFAULT, 'Murilo', '2025-08-10', 'M', 12.0, 1.00, 'Brasil'),
+(DEFAULT, 'Roberto', '1996-08-07', 'M', 95.5, 1.85, 'Brasil');
 
-. Para adicionar mais de uma pessoa de uma unica vez, ao inves de utilizar o ponto e virgula no final de cada informação de pessoa, utiliza-se somente a VIRGULA, segue o exemplo da inserção de 3 pessoas ao mesmo tempo: 
-
-INSERT INTO pessoas VALUES
-(default ,'Cassia', '1995-02-28', 'F', '60.5', '1.65', 'Brasil'),
-(default, 'Murilo', '2025-08-10', 'M', '12.0', '1.00', 'Brasil'),
-(default, 'Roberto', '1996-08-07', 'M', '95.5', '1.85', 'Brasil');
-
-. Lembrando que sempre pra encerrar a linha de comando utilizar o PONTO E VIRGULA (;)
-
-. Neste caso estamos usando a regra(constraints) DEFAULT, porque quando criamos os campos de ID e NACIONALIDADE, definimos valores padrões como por exemplo na NACIONALIDADE 'Brasil', quando usamos DEFAULT o sistema preenchera automaticamente com o que ja definimos previamente na criação do campo, no caso do ID temos a regra(constraints) AUTO_INCREMENT que nesse caso ele preencherá de forma automatica a sequencia de pessoas cadastradas.
+. O uso do DEFAULT no campo ID aciona o mecanismo do AUTO_INCREMENT, instruindo o banco a calcular e preencher o próximo número da sequência de forma automática.
 
 ----------------------------------------------------------------------------------------------------------
 
-. Para firmar conhecimento comandos DDL's(DATA DEFINITION LANGUAGE) são comandos de DEFINIÇÃO, que são para definir a estrutura do banco de dados, como por exemplo o CREATE DATABASE e CREATE TABLE
+CONCEITOS COMPLEMENTARES: DDL VS DML
 
-. Comandos DML's(DATA MANIPULATION LANGUAGE) são comandos para MANIPULAÇÕES de dados como por exemplo INSERT INTO
+As instruções SQL são divididas em subgrupos de acordo com o seu objetivo no banco de dados:
 
-----------------------------------------------------------------------------------------------------------
+. Comandos DDL (Data Definition Language): São comandos de DEFINIÇÃO de estrutura. Eles manipulam os objetos do banco de dados, ou seja, criam, alteram ou destroem as tabelas e colunas em si (Exemplos: CREATE DATABASE, CREATE TABLE, ALTER TABLE, DROP TABLE, RENAME TABLE).
 
-. Temos um comando para alterar a tabela no banco de dados, e esse comando é ALTER TABLE (nome da tabela) exemplo: 
-
-ALTER TABLE pessoas
-
-. Em seguida para adicionar algum campo novo na tabela, usamos ADD COLUMN (nome do campo que deseja adicionar) exemplo: 
-
-ALTER TABLE pessoas
-ADD COLUMN (nome do campo para adicioar)(Tipo primitivo);
-
-. Para excluir um campo no banco de dados, utiliza-se o comando DROP COLUMN (nome do campo) exemplo:
-
-ALTER TABLE pessoas
-DROP COLUMN (nome do campo)
-
-. Lembrando que COLUMN refere-se ao campo da tabela, como por exemplo o campo NOME, NASCIMENTO, PESO...
-
-----------------------------------------------------------------------------------------------------------
-                                      COMANDOS ALTER TABLE
-
-                                      
-. Para adicionar um campo em local especifico entre os campos que ja existem na tabela utilizamos o comando AFTER, segue o exemplo: 
-
-ALTER TABLE (nome da tabela)
-ADD COLUMN (nome do campo)(tipo primitivo) AFTER (nome do campo que sera utilizado de referencia para locaçao do novo campo)
-
-. Ja para adicionar um campo em primeira posição na tabela utilizamos o comando FIRST, segue o exemplo:
-
-ALTER TABLE (nome da tabela)
-ADD COLUMN (nome do campo)(tipo primitivo) FIRST;
-
-. Para alterar o valor de um tipo primitivo como por exemplo o campo PROFISSAO que esta com o VARCHAR(10), utilizamos o comando MODIFY COLUMN, segue o exemplo: 
-
-ALTER TABLE pessoas
-MODIFY COLUMN profissao varchar(20)
-
-. Para renomear um campo ou uma regra(constrants) utilizamos o codigo CHANGE COLUMN, segue o exemplo:
-
-ALTER TABLE pessoas
-CHANGE COLUMN (nome do campo que vai ser alterado) (novo nome desse campo)(tipo primitivo)
-
-. Para renomear a tabela toda, utiliza-se o comando RENAME TO, segue o exemplo:
-
-alter table pessoas
-RENAME TO (novo nome da tabela);
-
-. Para transformar um campo em PRIMARY KEY, utiliza-se o comando ADD PRIMARY KEY, segue o exemplo:
-
-ALTER TABLE (nome da tabela)
-ADD PRIMARY KEY(nome do campo que se tornará a CHAVE PRIMARIA da tabela);
-
-. Para apagar uma tabela toda, utiliza-se o comando DROP TABLE, segue o exemplo:
-
-DROP TABLE (nome da tabela)
-----------------------------------------------------------------------------------------------------------
-
-. Um comando muito importante que serve para ver o conteudo que tem na tabela, é o DESCRIBE ou DESC, exemplo:
-
-desc (nome da tabela);
-
-. Ele mostrava todos os campos que a tabela possue
+. Comandos DML (Data Manipulation Language): São comandos de MANIPULAÇÃO de dados. Eles interagem diretamente com as informações salvas dentro das linhas das tabelas (Exemplos: INSERT INTO, UPDATE, DELETE).
 
 ----------------------------------------------------------------------------------------------------------
 
-. Para nao correr o risco de sobreescrever uma tabela ja criada, podemos utilizar o comando IF NOT EXISTS, isso faz com que a tabela nova só seja criada, se ela nao existir ja no banco de dados, segue o exemplo:
+MODIFICANDO A ESTRUTURA DAS TABELAS (ALTER TABLE)
 
-CREATE TABLE IF NOT EXISTS (nome da tabela)()
+Quando precisamos realizar manutenções ou evoluções na estrutura de uma tabela já existente, utilizamos comandos DDL iniciando com a instrução ALTER TABLE:
+
+. Para adicionar uma nova coluna comum ao final da tabela:
+ALTER TABLE pessoas ADD COLUMN profissao varchar(20);
+
+. Para adicionar uma nova coluna em uma posição específica (logo após uma coluna de referência):
+ALTER TABLE pessoas ADD COLUMN profissao varchar(20) AFTER nome;
+
+. Para adicionar uma nova coluna na primeiríssima posição da tabela:
+ALTER TABLE pessoas ADD COLUMN profissao varchar(20) FIRST;
+
+. Para modificar as propriedades internas de uma coluna (como alterar o seu tipo primitivo ou adicionar NOT NULL):
+ALTER TABLE pessoas MODIFY COLUMN profissao varchar(30) NOT NULL;
+
+. Para renomear o nome de uma coluna e alterar suas propriedades ao mesmo tempo:
+ALTER TABLE pessoas CHANGE COLUMN profissao cargo varchar(30);
+
+. Para excluir permanentemente uma coluna e todos os dados armazenados nela:
+ALTER TABLE pessoas DROP COLUMN cargo;
+
+. Para renomear o nome da tabela inteira:
+ALTER TABLE pessoas RENAME TO gafanhotos;
+
+. Para definir uma Chave Primária em uma tabela que foi criada sem ela:
+ALTER TABLE cursos ADD PRIMARY KEY (idcurso);
+
+. Para excluir uma tabela inteira do banco de dados:
+DROP TABLE nome_da_tabela;
+
+. Para verificar detalhadamente a estrutura estrutural atual de uma tabela (nomes, tipos, restrições e chaves):
+DESCRIBE pessoas; (ou simplesmente: DESC pessoas;)
+
+. Boas práticas de criação: Para evitar que o script falhe tentando criar uma tabela que já existe no sistema, adicionamos a cláusula de verificação IF NOT EXISTS:
+CREATE TABLE IF NOT EXISTS nome_da_tabela ( ... );
 
 ----------------------------------------------------------------------------------------------------------
-                        COMANDOS DELETE, UPDATE, SET, WHERE E TRUNCATE
 
-. Para alterar informações de alguma LINHA na tabela, utilizamos o codigo UPDATE, em seguida usamos SET para mostrar qual campo sera alterado, seja ele o campo de nome, nascimento, peso, seguido de um sinal de IGUAL (=), seguido da informação que será colocado no campo em questao, dentro de 'ASPAS', em seguida utilizamos um comando de referencia para saber qual LINHA sera alterado o campo, o comando é WHERE seguido do nome DA COLUNA de referencia como por exemplo o ID da pessoa, segue o exemplo
+MODIFICANDO E EXCLUINDO REGISTROS (UPDATE E DELETE)
 
-UPDATE (nome da tabela)
-SET (nome do campo) = '(Nova informação que sera inserida, ou substituirá a informação antiga)'
-WHERE (nome da coluna de referencia) = '(Valor que se encontra nessa coluna de referencia)'
+Para alterar ou remover dados que já estão salvos nas linhas das tabelas, utilizamos comandos DML combinados com filtros de seleção:
 
-TABELA COM A INFORMAÇÃO ERRADA
+. O comando UPDATE altera informações armazenadas. A cláusula SET especifica a coluna e o novo valor, enquanto a cláusula WHERE cria a condição de filtro (geralmente apontando para o ID do registro) para determinar qual linha exata será modificada.
 
-Tabela CURSOS:
-idcurso       nome       carga      ano
-
-   1          HTML4       40        2014
-   4          PGP         40        2010
-   5          JARVA       10        2000
-
-. Utilizando os comandos para alterar o nome do curso incorreto, ficará assim
-
-UPDATE Cursos
+UPDATE cursos
 SET nome = 'HTML5'
-WHERE idcurso = '1';
+WHERE idcurso = 1;
 
-. Resumindo esse comando nesse exemplo trocara o nome do curso de HTML4 para HTML5, usando o WHERE como referencia de coluna para saber qual nome exatamente sera modificado
-
-. Para alterar dois campos na mesma linha utilizamos a VIRGULA(,) para dar mais alteraçoes ao comando, seguindo o exemplo de cima, vamos somente adicionar a VIRGULA no comando SET, segue o exemplo
-
-TABELA COM A INFORMAÇÃO ERRADA
-
-Tabela CURSOS:
-idcurso       nome       carga      ano
-
-   1          HTML4       40        2014
-   4          PGP         40        2010
-   5          JARVA       10        2000
+. Para atualizar múltiplos campos de uma mesma linha simultaneamente, separamos as atribuições na cláusula SET por vírgula:
 
 UPDATE cursos
-SET nome = 'PHP' , ano = '2015'
-WHERE idcruso = '4';
+SET nome = 'PHP', ano = '2015'
+WHERE idcurso = 4;
 
-. Para efeito de segurança toda vez que for necessario utilizar o comando UPDATE, utilizamos um 'regra' que o comando de LIMIT, basicamente ele limita o comando do UPDATE na quantidade de linhas que voce designar no comando LIMITI, segue o exemplo:
+. ⚠️ Trava de segurança essencial (LIMIT): O comando UPDATE é extremamente perigoso. Se a cláusula WHERE for omitida ou escrita incorretamente, o banco atualizará TODAS as linhas da tabela. Como boa prática de segurança em ambientes de desenvolvimento, utilizamos o comando LIMIT 1 no final do bloco para garantir que, mesmo em caso de erro no filtro, apenas uma única linha seja afetada:
 
 UPDATE cursos
-SET nome = 'JAVA' , carga = '40', ano = '2015'
-WHERE idcurso = '5'
+SET nome = 'Java', carga = 40, ano = '2015'
+WHERE idcurso = 5
 LIMIT 1;
 
-. O LIMIT é basicamente uma trava de segurança a mais, para nao ocorrer de alterar campos que não podem ser alterados utilizando incorretamente o comando WHERE para pegar a coluna de referencia
-
-. Para apagar LINHAS de uma coluna utilizamos o comando DELETE FROM em seguida utilizamos o comando FROM, segue o exemplo:
+. Para excluir linhas específicas de uma tabela, utilizamos o comando DELETE FROM associado obrigatoriamente a uma condição de filtro WHERE:
 
 DELETE FROM cursos
-WHERE idcurso = '8';
+WHERE idcurso = 8;
 
-. Para apagar TODAS as linhas de uma tabela utiliza-se o comando TRUNCATE, segue o exemplo:
-
-TRUNCATE TABLE (nome da tabela)
+. Para esvaziar completamente uma tabela, apagando todas as suas linhas de forma ultra rápida e reiniciando o contador do AUTO_INCREMENT de volta para o número 1, utiliza-se o comando DDL:
+TRUNCATE TABLE nome_da_tabela;
 
 ----------------------------------------------------------------------------------------------------------
 
-                     GERENCIAMENTO DE SEGURANÇA DO BANCO DE DADOS (BACKUP)
+GERENCIAMENTO E SEGURANÇA (BACKUP E RESTAURAÇÃO)
 
-. O termo utilizado para referir-se a um backup de um banco de dados é DUMP
+. No ecossistema de bancos de dados, o termo técnico utilizado para se referir à cópia de segurança e exportação dos dados é DUMP.
 
-. Para criar um backup do seu banco de dados seguimos o seguinte caminho SERVER >> DATA EXPORT >> em seguida escolhemos o banco de dados que queremos criar o backup >> Depois escolhemos quais tabelas queremos fazer o backup (recomenda-se fazer o bacluk do banco de dados inteiro) >> depois escolhemos o tipo de DUMP que faremos, se sera somente da estrutura do banco de dados (DUMP STRUCTURE ONLY) ou se será feito o DUMP somente dos dados do banco de dados (DUMP DATA ONLY), e caso queira o banco de dados completo, selecionamos o DUMP completo (DUMP STRUCTURE AND DATA) >> Em seguida selecionamos o tipo da exportação, se sera em arquivo unico ou a pasta completa >> Em seguida escolhemos em qual pasta será salvo o DUMP >> Marcamos a caixa INCLUDE CREATE SCHEMA, que é basicamente para seu banco de dados ja ser exportado com as configurações do CREATE TABLE, sem a necessidade de voce precisar dar esse comando quando IMPORTAR o DUMP em outra maquina >> Clicamos em START EXPORT >> Colocamos a senha do banco de dados e se precisar o usuario também >> Para encontrar a pasta onde foi salva o DUMP, caso nao tenha alterado no campo de escolha da pasta, basta ir em >> WINDOWS EXPLORER >> DOCUMENTOS >> DUMP      
+. Passo a passo para gerar um Backup (Export) no MySQL Workbench:
+Menu superior SERVER >> DATA EXPORT >> Selecione o banco de dados desejado >> Selecione as tabelas envolvidas >> Escolha o tipo de Dump no menu suspenso (Selecione "Dump Structure and Data" para fazer a cópia completa da estrutura das tabelas e dos registros) >> Marque a opção "Export to Self-Contained File" (Arquivo Único) >> Defina a pasta de destino no seu computador >> Ative a caixa de seleção **INCLUDE CREATE SCHEMA** (isso fará com que o arquivo inclua as instruções de criação do banco de dados automaticamente, eliminando a necessidade de criá-lo manualmente na máquina de destino) >> Clique no botão START EXPORT (insira a senha do banco caso seja solicitada). Por padrão, se não alterado, o arquivo será salvo na pasta Documentos/Dump do Windows.
 
-. Para IMPORTAR o DUMP >> SERVER >> IMPORT DATA >> Selecione a pasta que esta salva o DUMP feito do EXPORT >> IMPORT DATA 
+. Passo a passo para restaurar um Backup (Import) no MySQL Workbench:
+Menu superior SERVER >> DATA IMPORT >> Selecione a opção correspondente ao seu modelo de exportação (Pasta ou Arquivo único) >> Localize o arquivo do DUMP no computador >> Clique no botão START IMPORT.
 
-------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
-f
+AMBIENTES DE GERENCIAMENTO GRÁFICO (PHP_MY_ADMIN)
+
+O phpMyAdmin é uma ferramenta de código aberto baseada na web projetada para lidar com a administração do MySQL. Nele, a criação de bancos de dados, tabelas, chaves e restrições pode ser feita de forma visual, automatizada e intuitiva através de telas e formulários, poupando o desenvolvedor de escrever códigos DDL manualmente para operações rotineiras.
+
+----------------------------------------------------------------------------------------------------------
+
+A ARTE DA CONSULTA DE DADOS (COMANDOS SELECT)
+
+O comando SELECT é a ferramenta do grupo DQL (Data Query Language) utilizada para filtrar, extrair e exibir as informações salvas no banco de dados.
+
+. O caractere asterisco (*) funciona como um caractere curinga, instruindo o banco a selecionar TODAS as colunas disponíveis na tabela:
+SELECT * FROM nome_da_tabela;
+
+. A cláusula ORDER BY organiza a exibição das linhas com base em uma coluna informada. Por padrão, a ordenação ocorre de forma ascendente (Ordem alfabética de A-Z ou numérica do menor para o maior).
+
+. Para inverter a ordenação e exibir os dados de forma decrescente (Z-A ou do maior para o menor), adicionamos a palavra-chave DESC (Descendente) logo após o nome da coluna:
+SELECT * FROM cursos ORDER BY nome DESC;
+
+. Para otimizar o tráfego de dados e exibir apenas colunas específicas no painel de resultados, removemos o asterisco e listamos os campos desejados separados por vírgula:
+SELECT nome, profissao, nascimento FROM pessoas;
+
+. Para extrair registros específicos aplicando critérios de filtragem nas linhas, acoplamos a cláusula WHERE à consulta:
+
+SELECT * FROM cursos
+WHERE ano = 2016
+ORDER BY nome;
+
+. Operadores relacionais permitidos na cláusula WHERE:
+  - = (Igual)
+  - > (Maior que)
+  - < (Menor que)
+  - >= (Maior ou igual a)
+  - <= (Menor ou igual a)
+  - != ou <> (Diferente de)
+
+. Seleção por intervalo integrado (BETWEEN): Permite buscar registros que estejam compreendidos dentro de uma faixa de valores mínima e máxima (inclusive). Exige a utilização do operador lógico AND para conectar os limites:
+
+SELECT nome, ano FROM cursos
+WHERE ano BETWEEN 2014 AND 2016;
+
+. Seleção por lista de correspondência (IN): Permite filtrar registros que correspondam exatamente aos valores específicos declarados dentro dos parênteses, funcionando de maneira diferente do BETWEEN:
+
+SELECT nome, descricao, ano FROM cursos
+WHERE ano IN (2014, 2015);
+
+. Sofisticação de filtros: Operadores lógicos avançados como AND (E), OR (OU) e NOT (NÃO) podem ser combinados livremente na cláusula WHERE para estruturar consultas com critérios cirúrgicos de filtragem.
