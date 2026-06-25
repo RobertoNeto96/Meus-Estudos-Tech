@@ -279,3 +279,41 @@ SELECT nome, descricao, ano FROM cursos
 WHERE ano IN (2014, 2015);
 
 . Sofisticação de filtros: Operadores lógicos avançados como AND (E), OR (OU) e NOT (NÃO) podem ser combinados livremente na cláusula WHERE para estruturar consultas com critérios cirúrgicos de filtragem.
+
+. Para filtrarmos os campos de acordo com alguma palavra especifica, utilizamos o comando LIKE, segue o exemplo:
+
+Select * from nomes
+Where nome LIKE 'P%';
+
+. Nesse comamando ele filtrará todos os nomes que COMEÇAM com a letra 'P'
+. O simbolo de PORCENTO significa que é um curinga, onde ele substitui nenhum, ou todos os caracteres, LEMBRANDO QUE A POSIÇÃO DO PORCENTO IMPORTA, COLOCANDO O SINAL % ANTES DA LETRA ELE FILTRA TUDO QUE TERMINA COM A LETRA EM QUESTÃO, JA COLOCANDO O SINAL APÓS A LETRA, E FILTRA TUDO QUE COMEÇA COM A LETRA EM QUESTÃO, E PARA FILTRAR COM A LETRA EM QUESTAO EM QUALQUER POSIÇÃO, UTILIZA-SE O SINAL DE % ANTES E DEPOIS DA LETRA
+. Para fazer o filtro de um campo que nao contenha uma letra em especifica utilizamos o NOT LIKE, segue o exemplo:
+
+Select * from nomes
+Where nome NOT LIKE 'p%';
+
+. Nesse caso ele filtrará tudo o que NAO contem a letra 'P'
+
+. No caso do simbolo % ele filtra tanto com ou sem caracteres no campo em questao, ja o simbolo UNDERLINE (_) ele exige que tenha algum caracter após o filtro especificado, seja letra ou numero
+
+. Com o comando DISTINCT o filtro puxará somente um valor de cada campo, se tiver varios campos com o mesmo valor, como por exemplo a NACIONALIDADE das pessoas no banco de dados, ele irá puxar somente uma nacionalidade de cada nacionalidade cadastrada, simplificando, ele ignora valores repetitivos. 
+
+. Para contar a quantidade de registros de um campo, utiliza-se COUNT(), onde podemos definir o que será contado, qual campo, sera contado, ou se sera contado tudo, utilizando ASTERISTICO(*), segue o exemplo:
+
+select COUNT(*) from cursos;
+
+. Para filtramos o maior valor de um campo, utilizamos o comando MAX, segue o exemplo:
+
+select MAX(carga) from cursos;
+
+. Neste caso ele filtra o curso com a maior carga de horas
+
+. Usando o mesmo conceito podemos utiliza o comando MIN, que pega o menor valor de um campo
+
+. Podemos usar o comando SUM para somar o conteudo de um campo, como por exemplo quantas aulas tem no total o banco de dados CURSO, segue o exemplo:
+
+select SUM(totaulas) from cursos;
+
+. Para usar o filtro e tirar a media de algum valor, usamos o comando AVG
+
+select AVG(totaulas) from cursos;
