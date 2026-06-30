@@ -329,3 +329,45 @@ GROUP BY cargas;
 
 . O comando HAVING filtra ainda mais os filtros ja aplicados 
 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                            MODELO RELACIONAL
+
+. No conceito de modelos relacionais, temos alguns tipos de cardionalidades, como o MUITOS PRA MUITOS, temos o UM PRA UM, temos UM PRA MUITOS
+
+. No modelo MUITOS PARA MUITOS, as duas tabelas se relacionam de forma que um dado pode estar relacionando com varios outros dados, e vice-e-versa
+
+. No modelo UM PARA UM trata-se onde um dado pode se relacionar apenas com outro dado
+
+. No modelo UM PARA MUITOS, trata-se de onde um dado pode se relacionar com varios outros dados, mas os outros dados podem se relacionar apenas com um unico dado
+
+. Lembrando que nem sempre um dado precisa se relacionar com outro
+
+. Um CHAVE ESTRANGEIRA é uma CHAVE PRIMARIA que vem de algum outro dado, para se relacionar com algum outro dado
+
+. Para fazermos o relacionamento entre o modelo de UM PRA UM, antes decidimos qual é o dado 'superior', e assim jogamos a CHAVE PRIMARIA do outro dado para dentro desse dado SUPERIOR, cadastrando como CHAVE ESTRANGEIRA
+
+. Para relacionarmos dados no modelo UM PARA MUITOS, SEMPRE sera pego a chave primaria do modelo que pode ter apenas UM RELACIONAMENTO, e jogamos dentro do modelo que pode ter VARIOS RELACIONAMENTOS, CADASTRANDO COM CHAVE ESTRANGEIRA
+
+. Para relacionarmos dados no modelo MUITO PARA MUITOS, CRIAMOS UM NOVO CONTAINER COM O RELACIOANEMENTO entre os dados, e adicionamos campos de informações nesse container, e assim ele se transforma em um modelo de UM PARA UM, e seguimos o relacionamento de acordo com o modelo UM PARA UM, onde jogamos a chave primaria de cada um para dentro do container novo criado, cadastrando como CHAVE ESTRANGEIRA cada chave primaria de cada modelo
+
+. Antes de criarmos a chave estrangeira devemos criar uma coluna com o nome especifico para fazermos o relacionamento entre as tabelas
+
+alter table cursos
+add column cursopreferido int;
+
+. Para adicionar uma CHAVE ESTRANGEIRA utilizamos o comando ADD FOREIGN KEY(nome da coluna), segue o exemplo:
+
+alter table gafanhotos
+ADD FOREIGN KEY (cursopreferido)
+references cursos(idcurso);
+
+. Explicando toda a estrutura do comando: ALTER TABLE é o comando para iniciarmos a alteração da tabela em que vamos cadastrar a CHAVE ESTRANGEIRA, logo em seguida utilizamos o comando ADD FOREIGN KEY() que é para cadastrarmos a CHAVE ESTRANGEIRA dentro dos parenteses colocamos o campo que RECEBERÁ a chave estrangeira, em seguida utilizamos o comando REFERENCES, que serve para gente REFERENCIAR qual TABELA iremos puxar os campos para RELACIONAR, no exemplo em questao puxamos a tabela CURSOS, e dentro dos PARENTESES colocamos qual coluna sera referenciada, SEMPRE SERA A COLUNA DA CHAVE PRIMARIA
+
+. Agora precisamos vincular o id da pessoa com o curso preferido dela, e pra isso fazemos a relação entre as duas tabelas GAFANHOTOS e CURSOS, pra isso vamos usar o comando UPDATE, segue o exemplo:
+
+update gafanhotos 
+set CURSOPREFERIDO = '6'
+where id = '1';
+
+. Explicando o comando acima, utilizamos o comando UPDATE para atualizar uma linha da tabela GAFANHOTOS, SET para inserir a informação na coluna CURSOPREFERIDO e WHERE para mostrar em qual linha sera especifica sera inserido o dado, ou seja sera inserido o curso 6 no na pessoa que tem o ID 1
