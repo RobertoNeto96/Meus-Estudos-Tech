@@ -293,7 +293,6 @@ Select * from nomes
 Where nome NOT LIKE 'p%';
 
 . Nesse caso ele filtrará tudo o que NAO contem a letra 'P'
-
 . No caso do simbolo % ele filtra tanto com ou sem caracteres no campo em questao, ja o simbolo UNDERLINE (_) ele exige que tenha algum caracter após o filtro especificado, seja letra ou numero
 
 . Com o comando DISTINCT o filtro puxará somente um valor de cada campo, se tiver varios campos com o mesmo valor, como por exemplo a NACIONALIDADE das pessoas no banco de dados, ele irá puxar somente uma nacionalidade de cada nacionalidade cadastrada, simplificando, ele ignora valores repetitivos. 
@@ -317,3 +316,16 @@ select SUM(totaulas) from cursos;
 . Para usar o filtro e tirar a media de algum valor, usamos o comando AVG
 
 select AVG(totaulas) from cursos;
+
+. Para agruparmos valores atraves de um filtro, utilizamos o comando GROUP BY, segue o exemplo:
+
+select carga from crusos
+GROUP BY carga;
+
+. Podemos filrar o agrupamento e mostrar quantos cursos contem a carga horaria do banco de dados utilizando filtros precisos com o agrupamento, como por exemplo:
+
+select cargas, count(*) from cursos
+GROUP BY cargas;
+
+. O comando HAVING filtra ainda mais os filtros ja aplicados 
+
