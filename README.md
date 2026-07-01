@@ -371,3 +371,4 @@ set CURSOPREFERIDO = '6'
 where id = '1';
 
 . Explicando o comando acima, utilizamos o comando UPDATE para atualizar uma linha da tabela GAFANHOTOS, SET para inserir a informação na coluna CURSOPREFERIDO e WHERE para mostrar em qual linha sera especifica sera inserido o dado, ou seja sera inserido o curso 6 no na pessoa que tem o ID 1
+
