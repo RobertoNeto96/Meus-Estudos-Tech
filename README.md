@@ -345,11 +345,11 @@ GROUP BY cargas;
 
 . Um CHAVE ESTRANGEIRA é uma CHAVE PRIMARIA que vem de algum outro dado, para se relacionar com algum outro dado
 
-. Para fazermos o relacionamento entre o modelo de UM PRA UM, antes decidimos qual é o dado 'superior', e assim jogamos a CHAVE PRIMARIA do outro dado para dentro desse dado SUPERIOR, cadastrando como CHAVE ESTRANGEIRA
+. Para fazermos o relacionamento entre o modelo de UM PRA UM 1:1, antes decidimos qual é o dado 'superior', e assim jogamos a CHAVE PRIMARIA do outro dado para dentro desse dado SUPERIOR, cadastrando como CHAVE ESTRANGEIRA
 
-. Para relacionarmos dados no modelo UM PARA MUITOS, SEMPRE sera pego a chave primaria do modelo que pode ter apenas UM RELACIONAMENTO, e jogamos dentro do modelo que pode ter VARIOS RELACIONAMENTOS, CADASTRANDO COM CHAVE ESTRANGEIRA
+. Para relacionarmos dados no modelo UM PARA MUITOS 1:N, SEMPRE sera pego a chave primaria do modelo que pode ter apenas UM RELACIONAMENTO, e jogamos dentro do modelo que pode ter VARIOS RELACIONAMENTOS, CADASTRANDO COM CHAVE ESTRANGEIRA
 
-. Para relacionarmos dados no modelo MUITO PARA MUITOS, CRIAMOS UM NOVO CONTAINER COM O RELACIOANEMENTO entre os dados, e adicionamos campos de informações nesse container, e assim ele se transforma em um modelo de UM PARA UM, e seguimos o relacionamento de acordo com o modelo UM PARA UM, onde jogamos a chave primaria de cada um para dentro do container novo criado, cadastrando como CHAVE ESTRANGEIRA cada chave primaria de cada modelo
+. Para relacionarmos dados no modelo MUITO PARA MUITOS N:N, CRIAMOS UM NOVO CONTAINER COM O RELACIOANEMENTO entre os dados, e adicionamos campos de informações nesse container, e assim ele se transforma em um modelo de UM PARA UM, e seguimos o relacionamento de acordo com o modelo UM PARA UM, onde jogamos a chave primaria de cada um para dentro do container novo criado, cadastrando como CHAVE ESTRANGEIRA cada chave primaria de cada modelo
 
 . Antes de criarmos a chave estrangeira devemos criar uma coluna com o nome especifico para fazermos o relacionamento entre as tabelas
 
