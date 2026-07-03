@@ -76,7 +76,7 @@ nacionalidade varchar(20)
 
 ```
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -90,7 +90,7 @@ DROP DATABASE nome_do_banco;
 
 ```
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -107,7 +107,7 @@ DEFAULT COLLATE utf8mb4_general_ci;
 
 *(Nota: O uso de `utf8mb4` é o padrão moderno recomendado para o MySQL, pois além de caracteres latinos, oferece suporte completo até para emojis).*
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -132,7 +132,7 @@ CREATE TABLE pessoas (
 * No campo "peso" e "altura", utilizamos o tipo `DECIMAL` para obter precisão numérica exata (evitando os arredondamentos incorretos do tipo `FLOAT`). Na configuração `decimal(5, 2)`, o primeiro número (5) representa o total de dígitos que a memória irá guardar, enquanto o segundo número (2) indica quantos desses dígitos serão após a vírgula. Exemplos válidos: 105.12, 65.29, 7.50.
 * A restrição `DEFAULT` serve para definir um valor padrão. No campo "nacionalidade", se o usuário omitir essa informação durante o cadastro, o MySQL preencherá o campo de forma automática com o texto `'Brasil'`.
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -158,7 +158,7 @@ CREATE TABLE pessoas (
 * A propriedade `AUTO_INCREMENT` faz com que o próprio MySQL gerencie a numeração sequencial dos registros (1, 2, 3, 4...). O desenvolvedor não precisa se preocupar em adivinhar qual é o próximo número.
 * Existe também a restrição `UNIQUE`. Enquanto a Chave Primária é o identificador principal da linha, a constraint `UNIQUE` garante que uma coluna secundária não possua valores repetidos no banco de dados (muito utilizada para colunas de E-mail, CPF ou Título de Eleitor).
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -192,7 +192,7 @@ INSERT INTO pessoas VALUES
 
 * O uso do `DEFAULT` no campo ID aciona o mecanismo do `AUTO_INCREMENT`, instruindo o banco a calcular e preencher o próximo número da sequência de forma automática.
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -203,7 +203,7 @@ As instruções SQL são divididas em subgrupos de acordo com o seu objetivo no 
 * **Comandos DDL (Data Definition Language):** São comandos de **DEFINIÇÃO** de estrutura. Eles manipulam os objetos do banco de dados, ou seja, criam, alteram ou destroem as tabelas e colunas em si (Exemplos: `CREATE DATABASE`, `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`, `RENAME TABLE`).
 * **Comandos DML (Data Manipulation Language):** São comandos de **MANIPULAÇÃO** de dados. Eles interagem diretamente com as informações salvas dentro das linhas das tabelas (Exemplos: `INSERT INTO`, `UPDATE`, `DELETE`).
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS nome_da_tabela ( ... );
 
 
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -341,7 +341,7 @@ TRUNCATE TABLE nome_da_tabela;
 
 
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -353,7 +353,7 @@ Menu superior `SERVER` >> `DATA EXPORT` >> Selecione o banco de dados desejado >
 * **Passo a passo para restaurar um Backup (Import) no MySQL Workbench:**
 Menu superior `SERVER` >> `DATA IMPORT` >> Selecione a opção correspondente ao seu modelo de exportação (Pasta ou Arquivo único) >> Localize o arquivo do DUMP no computador >> Clique no botão `START IMPORT`.
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -361,7 +361,7 @@ Menu superior `SERVER` >> `DATA IMPORT` >> Selecione a opção correspondente ao
 
 O **phpMyAdmin** é uma ferramenta de código aberto baseada na web projetada para lidar com a administração do MySQL. Nele, a criação de bancos de dados, tabelas, chaves e restrições pode ser feita de forma visual, automatizada e intuitiva através de telas e formulários, poupando o desenvolvedor de escrever códigos DDL manualmente para operações rotineiras.
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -501,7 +501,7 @@ GROUP BY carga;
 
 * O comando `HAVING` funciona de forma similar ao `WHERE`, porém ele é aplicado especificamente para filtrar os resultados que já foram agrupados pelo `GROUP BY`.
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
@@ -549,7 +549,7 @@ WHERE id = '1';
 
 
 
-[Subir para o Sumário](https://www.google.com/search?q=%23%EF%B8%8F-sum%C3%A1rio)
+[Subir para o Sumário](#sumário)
 
 ---
 
