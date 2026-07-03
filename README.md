@@ -372,3 +372,72 @@ where id = '1';
 
 . Explicando o comando acima, utilizamos o comando UPDATE para atualizar uma linha da tabela GAFANHOTOS, SET para inserir a informação na coluna CURSOPREFERIDO e WHERE para mostrar em qual linha sera especifica sera inserido o dado, ou seja sera inserido o curso 6 no na pessoa que tem o ID 1
 
+------------------------------------------------------------------------------------------------------------------------------------------------
+# 📑 Explicando o JOIN
+
+O comando `JOIN` é utilizado para fazer a relação entre duas tabelas, e temos alguns tipos dele no SQL.
+
+## 1. INNER JOIN
+Este comando só retornará um dado ou informação caso **ambas** as tabelas relacionadas contenham informações correspondentes. Do contrário, ele ignora a linha e não mostra nada. 
+
+Para exemplificar, imagine duas tabelas: `CLIENTES` e `PRESENTES`.
+
+### Tabelas Originais:
+
+**PRESENTES**
+| id_pedido | id_cliente | produto |
+| 101       |     1      | Notebook|
+| 102       |     2      | Celular |
+| 103       |     99     | Mouse   |
+
+**CLIENTES**
+| id_cliente | nome |
+| 1          | Ana  |
+| 2          | Bruno|
+| 3          | Carlos|
+
+### O Comportamento do INNER JOIN:
+Analisando as tabelas acima, quando utilizamos o `INNER JOIN`, ele só retornará as informações que possuem par correspondente em ambas:
+
+| nome | produto |
+| Ana  | Notebook|
+| Bruno| Celular |
+
+**Por que os outros foram ignorados?**
+* O cliente **Carlos** não aparece porque ele não possui nenhum registro de pedido na tabela `PRESENTES`.
+* O produto **Mouse** não aparece porque o `id_cliente 99` não existe na tabela `CLIENTES`.
+
+## 2. LEFT JOIN (ou LEFT OUTER JOIN)
+Este comando prioriza totalmente a tabela posicionada à **esquerda** da cláusula `JOIN`. Ele retornará **todos** os registros dessa tabela da esquerda, independentemente de haver ou não uma informação correspondente na tabela da direita. 
+
+Se não houver correspondência, o SQL traz os dados da esquerda e preenche os campos da direita com `NULL` (vazio).
+
+### Tabelas de Exemplo:
+
+| id_pedido | id_cliente | produto |
+| 101       |     1      | Notebook|
+| 102       |     2      | Celular |
+| 103       |     99     | Mouse   |
+
+**CLIENTES**
+| id_cliente | nome |
+| 1          | Ana  |
+| 2          | Bruno|
+| 3          | Carlos|
+
+. As informações que seriam retornadas seriam essas:
+| nome | produto |
+| Ana  | Notebook|
+| Bruno| Celular |
+| Carlos| NULL   |
+
+**Por que esse resultado?**
+* **Ana** e **Bruno** possuem correspondência na tabela de presentes, então seus produtos aparecem normalmente.
+* **Carlos** não comprou nada, mas como ele está na tabela da esquerda, ele **é obrigado a aparecer**. Como não há produto para ele, o banco preenche com `NULL`.
+* O **Mouse** é completamente ignorado porque pertence à tabela da direita (`PRESENTES`) e não tem nenhum cliente correspondente na esquerda.
+
+## 3. RIGHT JOIN (ou RIGHT OUTER JOIN)
+Este comando funciona exatamente da mesma forma que o `LEFT JOIN`, mas com o lado invertido: ele prioriza totalmente a tabela posicionada à **direita** da cláusula `JOIN`. 
+
+Ele retornará **todos** os registros da tabela da direita, mesmo que não haja correspondência na tabela da esquerda.
+
