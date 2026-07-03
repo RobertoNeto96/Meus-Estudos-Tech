@@ -1,4 +1,3 @@
-```markdown
 # 📌 Meus Estudos Tech
 
 Repositório dedicado ao registro da minha jornada de estudos em tecnologia, centralizando anotações, exercícios e projetos práticos baseados no curso de MySQL do Curso em Vídeo (Prof. Gustavo Guanabara).
@@ -43,7 +42,7 @@ Ao criar campos em uma tabela, precisamos definir a natureza dos dados que eles 
 
 * **Espaciais:** Usados para dados geográficos e de geolocalização (Ex: `GEOMETRY`, `POINT`, `POLYGON`).
 
-[Subir para o Sumário](#️-sumário)
+[Subir para o Sumário](#sumário)
 
 ---
 
