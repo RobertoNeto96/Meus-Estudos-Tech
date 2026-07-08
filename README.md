@@ -10,6 +10,9 @@ Aqui você encontra a divisão dos meus estudos organizada por módulos e tecnol
 
 * [🛢️ Banco de Dados - MySQL](./MySQL/README.md)
   > Anotações completas do curso de MySQL (Curso em Vídeo - Prof. Gustavo Guanabara), cobrindo desde os tipos primitivos, restrições de colunas, manipulação de dados (DML/DDL) até JOINs complexos.
+  
+* [🐍 Integração Python + SQL](./Python-e-Bancos/README.md)
+ > Estudos focados na conexão de scripts Python com o MySQL, automação de queries, manipulação de dados via código e tratamento de exceções em banco de dados.
 
 ---
 
