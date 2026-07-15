@@ -6,7 +6,7 @@ try:
 # Nesse comando vamos criar uma variavel para definirmos todo o script de craição no banco de dados com o CREATE TABLE
     criar_tabela_SQL = """create table jogos (
                         id_jogo int not null auto_increment primary key,
-                        NomeJogo varchar(50) not null,
+                        nome_jogo varchar(50) not null,
                         preco decimal (5 , 2) not null,
                         duracao_em_horas float not null);"""
 

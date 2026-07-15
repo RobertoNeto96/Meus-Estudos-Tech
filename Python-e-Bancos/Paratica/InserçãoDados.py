@@ -22,7 +22,7 @@ try:
         quantidadehoras = int(input('Quantidade em horas de duração: '))
 
         # O molde SQL com os placeholders
-        inserir_dados_SQL = """INSERT INTO jogos (id_jogo, NomeJogo, preco, duracao_em_horas)
+        inserir_dados_SQL = """INSERT INTO jogos (id_jogo, nome_jogo, preco, duracao_em_horas)
                                VALUES (default, %s, %s, %s);"""
 
         dados = (nomejogo, precojogo, quantidadehoras)
