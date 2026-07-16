@@ -10,28 +10,27 @@ def conectar():
         print(f'Ocorreu um erro durante a tentativa de conexão, Erro:{e}')
 
 
-def consulta(id_jogo):
-    con = conectar()
-    cursor = con.cursor()
-    comando_sql = f'SELECT * FROM jogos WHERE id_jogo = {id_jogo}'
-    cursor.execute(comando_sql)
-    linhas = cursor.fetchall()
+def consulta_id(id_jogo):    
+        con = conectar()
+        cursor = con.cursor()
+        comando_sql = f'SELECT * FROM jogos WHERE id_jogo = {id_jogo}'
+        cursor.execute(comando_sql)
+        linhas = cursor.fetchall()
 
-    for linha in linhas:
-        print(f'ID do jogo: {linha[0]}')
-        print(f'Jogo: {linha[1]}')
-        print(f'Preço: {linha[2]}')
+        for linha in linhas:
+            print(f'ID do jogo: {linha[0]}')
+            print(f'Jogo: {linha[1]}')
+            print(f'Preço: {linha[2]}')
 
-    if con and con.is_connected():
-        cursor.close()
-        con.close()    
-
+        if con and con.is_connected():
+            cursor.close()
+            con.close()    
+ 
 if __name__ == '__main__':
 
     print('--- Bem Vindo a consulta de jogos ---')
-
     try:
         id_escolhido = int(input('Digite qual ID do jogo que deseja consultar:'))
-        consulta(id_escolhido)   
+        consulta_id(id_escolhido)   
     except ValueError:
-        print('Por favor digite o ID do jogo utilizando números')         
+        print('Por favor digite o ID do jogo utilizando números')        
