@@ -33,7 +33,7 @@ pip install streamlit
 O ponto de partida do projeto foi entender como abrir uma porta de comunicação entre o Python e o banco.
 
 Para ler o guia passo a passo da primeira conexão, entender o funcionamento do `cursor`, do método `fetchone()` e de como criar tabelas direto via código (utilizando estruturas de segurança como `try/except/finally`), consulte a documentação detalhada no nosso arquivo de criação:
-👉 **[Guia de Criação de Tabelas e Conexão (CriandoTabela.py)](https://www.google.com/search?q=./Pratica/CriandoTabela.py)**
+👉 **[Guia de Criação de Tabelas e Conexão (CriandoTabela.py)](CriandoTabela.py)**
 
 ---
 
