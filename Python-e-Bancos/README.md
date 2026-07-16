@@ -1,20 +1,19 @@
-```markdown
-# 🎮 Python, MySQL & Streamlit: Sistema de Gerenciamento de Jogos
+# Python, MySQL & Streamlit: Sistema de Gerenciamento de Jogos
 
 Neste repositório, documento os meus estudos práticos sobre a integração entre bancos de dados relacionais (MySQL), scripts de automação em Python e a criação de interfaces web modernas com o Streamlit.
 
 ---
 
-## 📌 Sumário de Conteúdos
+## Sumário de Conteúdos
 
-1. [🛠️ Primeiros Passos: Instalação e Ambiente](#️-primeiros-passos-instalação-e-ambiente)
-2. [🔌 Conexão Básica com o MySQL](#-conexão-básica-com-o-mysql)
-3. [📂 Módulos do Sistema (CRUD no Terminal)](#-módulos-do-sistema-crud-no-terminal)
-4. [🖥️ Interface Web com Streamlit](#️-interface-web-com-streamlit)
+1. [Primeiros Passos: Instalação e Ambiente](#primeiros-passos-instalação-e-ambiente)
+2. [Conexão Básica com o MySQL](#conexão-básica-com-o-mysql)
+3. [Módulos do Sistema (CRUD no Terminal)](#módulos-do-sistema-crud-no-terminal)
+4. [Interface Web com Streamlit](#interface-web-com-streamlit)
 
 ---
 
-## 🛠️ Primeiros Passos: Instalação e Ambiente
+## Primeiros Passos: Instalação e Ambiente
 
 Para fazer o Python conversar com o MySQL e gerar a nossa interface web, precisamos instalar os seguintes conectores e bibliotecas no terminal:
 
