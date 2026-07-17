@@ -16,7 +16,7 @@ Clique em qualquer um dos módulos abaixo para abrir o arquivo de código corres
 * 🆔 **[Consulta de Jogo por ID (ConsultaUnica.py)](./Pratica/ConsultaUnica.py)** - Filtra e exibe os dados detalhados de apenas um jogo.
 * ✏️ **[Alterar Preço do Jogo (AlterarDados.py)](./Pratica/AlterarDados.py)** - Altera o valor de um jogo específico buscando pelo ID.
 * 🏗️ **[Criação da Tabela de Jogos (CriandoTabela.py)](./Pratica/CriandoTabela.py)** - Script de conexão básica e estrutura de criação da tabela.
-* ✏️ **[Anotações sobre StreamLit (app.py)](./Pratica/app.py)** - Arquivo pratico das aplicações do curso
+* ✏️ **[Campo pratico de StreamLit (app.py)](./Pratica/app.py)** - Arquivo pratico das aplicações do curso
 
 # 🎈 Minhas Anotações de Streamlit (`st`)
 
